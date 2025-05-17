@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cyberbullying Detector</title>
+    <script>
+      async function sendText() {
+        const userInput = document.getElementById("textInput").value;
+
+        const response = await fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: userInput }),
+        });
+
+        const data = await response.json();
+        document.getElementById("result").innerText = data.result || data.error;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Cyberbullying Detection</h2>
+    <textarea
+      id="textInput"
+      rows="4"
+      cols="50"
+      placeholder="Enter your text here..."
+    ></textarea
+    ><br /><br />
+    <button onclick="sendText()">Check</button>
+    <p><strong>Result:</strong> <span id="result"></span></p>
+  </body>
+</html>
