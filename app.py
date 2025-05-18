@@ -4,9 +4,14 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 import os
+from flask_cors import CORS
+
 load_dotenv()
 
 app = Flask(__name__)
+
+CORS(app)  # allows all origins (use only for testing!)
+
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def generate_response(user_query):
     custom_template = """
